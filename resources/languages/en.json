@@ -1,0 +1,6 @@
+{
+  "ExceptionMsgCodeNotDefined": "Message code not defined",
+  "ExceptionRequestRouteNotFound": "Route not found",
+  "ExceptionRequestMethodNotFound": "Method not found",
+  "RequestDataSuccess": "Request data success"
+}

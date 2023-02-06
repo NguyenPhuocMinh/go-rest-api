@@ -1,0 +1,6 @@
+{
+  "ExceptionMsgCodeNotDefined": "Mã tin nhắn không được xác định",
+  "ExceptionRequestRouteNotFound": "Không tìm thấy tuyến đường",
+  "ExceptionRequestMethodNotFound": "Không tìm thấy method",
+  "RequestDataSuccess": "Request data success"
+}
