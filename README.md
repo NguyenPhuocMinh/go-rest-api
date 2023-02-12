@@ -69,7 +69,7 @@ $ cd tests && go test
 ## Clone
 
 ```sh
-$ git clone https://github.com/NguyenPhuocMinh/fast-food-api-client.git
+$ git clone https://github.com/NguyenPhuocMinh/go-rest-api.git
 ```
 
 ## Environment variable
