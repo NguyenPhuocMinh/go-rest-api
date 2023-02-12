@@ -5,7 +5,7 @@ func (r *ResponseModel) SetData(data interface{}) *ResponseModel {
 	return r
 }
 
-func (r *ResponseModel) SetError(err interface{}) *ResponseModel {
+func (r *ResponseModel) SetError(err *ErrorModel) *ResponseModel {
 	r.Error = err
 	return r
 }

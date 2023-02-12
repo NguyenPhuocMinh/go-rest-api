@@ -1,17 +1,15 @@
 package commons
 
 import (
-	translator "fast-food-api-client/translator"
 	utils "fast-food-api-client/utils"
 
 	"github.com/gin-gonic/gin"
 )
 
 func TemplateSuccessCommon(c *gin.Context, data interface{}, messageCode string) *ResponseModel {
-
 	lang := c.Request.Header.Get("Lang")
 
-	statusCode, messageName, messageTranslator := buildTemplateCommon(messageCode, lang)
+	statusCode, messageName, messageTranslator := TemplateMapCommon(messageCode, lang)
 
 	res := ResponseModel{
 		Data:              data,
@@ -26,14 +24,19 @@ func TemplateSuccessCommon(c *gin.Context, data interface{}, messageCode string)
 }
 
 func TemplateErrorCommon(c *gin.Context, err error, messageCode string) *ResponseModel {
-
 	lang := c.Request.Header.Get("Lang")
 
-	statusCode, messageName, messageTranslator := buildTemplateCommon(messageCode, lang)
+	errComp, errFile := utils.GetFileByError()
+
+	statusCode, messageName, messageTranslator := TemplateMapCommon(messageCode, lang)
 
 	res := ResponseModel{
-		Data:              nil,
-		Error:             err.Error(),
+		Data: nil,
+		Error: &ErrorModel{
+			ErrorDetail:    err.Error(),
+			ErrorFile:      errFile,
+			ErrorComponent: errComp,
+		},
 		StatusCode:        statusCode,
 		MessageCode:       messageCode,
 		MessageName:       messageName,
@@ -44,10 +47,10 @@ func TemplateErrorCommon(c *gin.Context, err error, messageCode string) *Respons
 	return &res
 }
 
-func buildTemplateCommon(messageCode string, lang string) (statusCode int, messageName string, messageTranslator string) {
+func TemplateMapCommon(messageCode string, lang string) (statusCode int, messageName string, messageTranslator string) {
 	statusCode = utils.MapStatusByMsgCode(messageCode)
 	messageName = utils.MapMsgNameByMsgCode(messageCode)
-	messageTranslator = translator.TranslateMessage(lang, messageCode)
+	messageTranslator = utils.MapMsgTranslatorByLangAndMsgCode(lang, messageCode)
 
 	return statusCode, messageName, messageTranslator
 }

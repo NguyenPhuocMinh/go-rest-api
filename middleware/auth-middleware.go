@@ -11,7 +11,7 @@ var logAuth = coreLogger.Logger(constants.AppName, constants.StructAuthMiddlewar
 
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		logAuth.Debug("BEGIN authMiddleware...")
+		logAuth.Debug("[BEGIN] authMiddleware...")
 		c.Next()
 	}
 }

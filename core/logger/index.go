@@ -1,10 +1,11 @@
 package logger
 
 import (
-	"fast-food-api-client/constants"
 	"fmt"
 	"strings"
 	"time"
+
+	constants "fast-food-api-client/constants"
 
 	"github.com/fatih/color"
 )
@@ -37,6 +38,10 @@ func (l *Package) Debug(args ...interface{}) {
 	sentryLog(l.appName, l.fileName, constants.TypeDebug, args...)
 }
 
+func (l *Package) Data(args ...interface{}) {
+	sentryLog(l.appName, l.fileName, constants.TypeData, args...)
+}
+
 func sentryLog(appName string, fileName string, logType string, args ...interface{}) *time.Time {
 	// format args to string message
 	message := fmt.Sprint(args...)
@@ -63,6 +68,9 @@ func formatPackage(appName string, fileName string, logType string) {
 	case constants.TypeDebug:
 		colorDebug := color.New(color.FgBlue).SprintFunc()
 		fmt.Printf("%s ", colorDebug(strings.ToUpper(appName), "(", fileName, ")"))
+	case constants.TypeData:
+		colorData := color.New(color.FgMagenta).SprintFunc()
+		fmt.Printf("%s ", colorData(strings.ToUpper(appName), "(", fileName, ")"))
 	default:
 		colorDefault := color.New(color.FgCyan).SprintFunc()
 		fmt.Printf("%s ", colorDefault(strings.ToUpper(appName), "(", fileName, ")"))

@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"errors"
+
 	commons "fast-food-api-client/commons"
 	constants "fast-food-api-client/constants"
 	coreLogger "fast-food-api-client/core/logger"
@@ -24,7 +25,7 @@ func NoRouteMiddleware() gin.HandlerFunc {
 		err := errors.New("Route not found for request path: " + c.Request.URL.String())
 
 		logNoRoute.Debug("END NoRouteMiddleware with err= ", err.Error())
-		res := commons.TemplateErrorCommon(c, err, resources.MsgCodeRouteNotFound)
+		res := commons.TemplateErrorCommon(c, err, resources.MsgCodeRequestRouteNotFound)
 		res.ResponseCommon(c)
 	}
 }

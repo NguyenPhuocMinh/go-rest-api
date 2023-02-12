@@ -2,6 +2,7 @@ package v1
 
 import "github.com/gin-gonic/gin"
 
-func InitRouter(r *gin.RouterGroup) {
+func Init(r *gin.RouterGroup) {
+	CommonRouter(r)
 	AuthRouter(r)
 }

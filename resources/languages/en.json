@@ -1,6 +1,12 @@
 {
-  "ExceptionMsgCodeNotDefined": "Message code not defined",
-  "ExceptionRequestRouteNotFound": "Route not found",
-  "ExceptionRequestMethodNotFound": "Method not found",
-  "RequestDataSuccess": "Request data success"
+  "ExceptionMsgCodeNotDefined": "Exception message code not defined",
+  "ExceptionRequestRouteNotFound": "Exception request route not found",
+  "ExceptionRequestMethodNotFound": "Exception request method not found",
+  "ExceptionRequestServiceNotFound": "Exception request service not found",
+  "ExceptionRequestServerError": "Exception request internal server error",
+  "ExceptionRequestDatabaseError": "Exception request database error",
+  "ExceptionRequestDataInvalid": "Exception request data invalid",
+  "ExceptionRequestDuplicatedError": "Exception request duplicate data",
+  "ExceptionRequestEmailInValid": "Exception request email invalid",
+  "RequestDataIsValid": "Request data is valid"
 }

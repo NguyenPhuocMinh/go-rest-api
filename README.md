@@ -4,9 +4,10 @@
 - [Golang For Beginner](#golang-for-beginner)
 - [Go get and Go mod tidy](#go-get-and-go-mod-tidy)
 - [Dev](#dev)
+- [Test](#test)
 - [Clone](#clone)
 - [Environment variable](#environment-variable)
-- [Ex .env](#ex-env)
+- [Structure](#structure)
 
 ## Golang For Beginner
 
@@ -33,10 +34,15 @@ $ go get -u github.com/gin-gonic/gin go.mongodb.org/mongo-driver/mongo github.co
   - github.com/joho/godotenv is a library for managing environment variables.
 
   - github.com/go-playground/validator/v10 is a library for validating structs and fields.
+  
+  - github.com/onsi/ginkgo/v2 is a testing framework for Go designed to help you write expressive tests
+  
+  - github.com/onsi/gomega is the Ginkgo BDD-style testing framework's preferred matcher library.
 
-- Format json
 
-```go
+- Parse json
+
+```javascript
   data, _ := json.MarshalIndent(res, "", " ")
 	fmt.Println("hehe", string(data))
 ```
@@ -55,19 +61,49 @@ $ go get -u github.com/gin-gonic/gin go.mongodb.org/mongo-driver/mongo github.co
 $ go run main.go
 ```
 
+## Test
+
+```sh
+$ cd tests && go test
+```
 ## Clone
 
 ```sh
-$ git clone https://github.com/NguyenPhuocMinh/pm-tool-api.git
+$ git clone https://github.com/NguyenPhuocMinh/fast-food-api-client.git
 ```
 
 ## Environment variable
 
-## Ex .env
+E.g:
 
 - APP_PORT=8080
-- APP_DOCS_PATH=/docs
-- APP_DOMAIN_PATH=http://localhost:3000
-- APP_SECRET_KEY=do-biet-day-secret
-- APP_AUDIENCE=pm-tool-aud
-- APP_ISSUER=http://localhost:3000
+- APP_MONGO_URI=mongodb://127.0.0.1:27017
+
+## Structure
+
+```sh
+.
+├── commons                            => Defined method commons
+├── configs                            => Defined environment variable
+├── constants                          => Defined constants
+├── core
+│   ├── database                       => Init database
+│   └── logger                         => Init logger
+├── helpers                            => Defined func helper
+├── main.go                            => Main
+├── middleware                         => Defined middleware
+├── resources                          => Defined success and error code
+├── src
+│   ├── controllers
+│   │   └── v1                         => Defined controller v1
+│   ├── dtos                           => Defined dto
+│   ├── mappers                        => Convert entity to dto
+│   ├── models                         => Defined model
+│   ├── routers
+│   │   └── v1                         => Defined router v1
+│   └── services
+│       └── v1                         => Defined service v1
+├── tests                              => Testing
+└── utils                              => Defined func utils
+├── README.md
+```

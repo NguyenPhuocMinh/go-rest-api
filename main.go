@@ -1,14 +1,15 @@
 package main
 
 import (
-	profiles "fast-food-api-client/configs"
-	constants "fast-food-api-client/constants"
-	coreLogger "fast-food-api-client/core/logger"
-	middleware "fast-food-api-client/middleware"
-	routerV1 "fast-food-api-client/routers/v1"
-
 	"fmt"
 	"net/http"
+
+	configs "fast-food-api-client/configs"
+	constants "fast-food-api-client/constants"
+	database "fast-food-api-client/core/database"
+	coreLogger "fast-food-api-client/core/logger"
+	middleware "fast-food-api-client/middleware"
+	routerV1 "fast-food-api-client/src/routers/v1"
 
 	"github.com/gin-gonic/gin"
 )
@@ -25,14 +26,15 @@ func main() {
 	router.NoMethod(middleware.NoMethodMiddleware())
 	router.Use(gin.Recovery())
 
-	router.GET("/ping", func(c *gin.Context) {
-		c.String(200, "pong")
-	})
-
+	// init router
 	v1 := router.Group("/api/v1")
-	routerV1.InitRouter(v1)
+	routerV1.Init(v1)
 
-	port := profiles.AppPort
+	// Init db
+	mongoURI := configs.AppMongoURI
+	database.Init(mongoURI)
+
+	port := configs.AppPort
 	logger.Info("The server is running on: ", port)
 
 	http.ListenAndServe(fmt.Sprintf(":%v", port), router)

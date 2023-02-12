@@ -4,14 +4,20 @@ const AppName = "fast-food-api"
 
 // main
 const StructMain = "main"
-const StructController = "controller"
-const StructService = "service"
-const StructTranslator = "translator"
+
+const (
+	StructDatabase   = "database"
+	StructController = "controller"
+	StructService    = "service"
+	StructTranslator = "translator"
+)
 
 // utils
 const (
-	StructEnvUtil    = "environment-util"
-	StructMapperUtil = "mapper-util"
+	StructEnvUtil        = "environment-util"
+	StructMapperUtil     = "mapper-util"
+	StructGeneratorUtil  = "generator-util"
+	StructPaginationUtil = "pagination-util"
 )
 
 // middleware
@@ -28,12 +34,18 @@ const (
 	LangVN = "vi"
 )
 
+// mode
+const (
+	CreateMode = "create"
+)
+
 // log types
 const (
 	TypeError = "ERROR"
 	TypeWarn  = "WARN"
 	TypeInfo  = "INFO"
 	TypeDebug = "DEBUG"
+	TypeData  = "DATA"
 )
 
 // status
@@ -53,16 +65,25 @@ const (
 
 // msg types
 const (
-	MsgTypeAuth = "Auth"
+	MsgTypeCommon = "Common"
+	MsgTypeAuth   = "Auth"
 )
 
 // msg actions
 const (
-	MsgActionAuthLogin = "AuthLogin"
+	MsgActionTest = "Test"
+)
+
+const (
+	MsgActionAuthLogin    = "AuthLogin"
+	MsgActionAuthRegister = "AuthRegister"
 )
 
 // controllers
-const StructAuthController = "auth-controller"
+const (
+	StructCommonController = "common-controller"
+	StructAuthController   = "auth-controller"
+)
 
 // services
 const (

@@ -8,7 +8,7 @@ import (
 var logLookup = coreLogger.Logger(constants.AppName, constants.StructLookupService)
 
 func LookupService(msgType string, msgAction string) FuncServiceHandler {
-	logLookup.Info("BEGIN LookupService with msgType=", "["+msgType+"]", ", msgAction=", "["+msgAction+"]")
+	logLookup.Debug("[BEGIN] LookupService with msgType=", "["+msgType+"]", ", msgAction=", "["+msgAction+"]")
 
 	services := BaseService()
 
@@ -17,12 +17,12 @@ func LookupService(msgType string, msgAction string) FuncServiceHandler {
 	for _, s := range services {
 		if s.MsgType == msgType && s.MsgAction == msgAction {
 			fnServiceHandler = s.Service
-			logLookup.Info("Lookup service success with service=", s.ServiceName)
+			logLookup.Debug("END] LookupService Success With Service = ", "["+s.ServiceName+"]")
 			return fnServiceHandler
 		}
 	}
 
-	logLookup.Info("END LookupService with msgType=", "["+msgType+"]", ", msgAction=", "["+msgAction+"]")
+	logLookup.Debug("[END] LookupService Not Found Service With msgType=", "["+msgType+"]", ", msgAction=", "["+msgAction+"]")
 
-	return fnServiceHandler
+	return nil
 }

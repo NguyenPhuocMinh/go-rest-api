@@ -2,7 +2,7 @@ package commons
 
 type ResponseModel struct {
 	Data              interface{} `json:"data"`
-	Error             interface{} `json:"error"`
+	Error             *ErrorModel `json:"error"`
 	Endpoint          string      `json:"endpoint"`
 	Method            string      `json:"method"`
 	StatusCode        int         `json:"statusCode"`
@@ -10,4 +10,16 @@ type ResponseModel struct {
 	MessageName       string      `json:"messageName"`
 	MessageTranslator string      `json:"messageTranslator"`
 	Pagination        interface{} `json:"pagination"`
+}
+
+type ErrorModel struct {
+	ErrorDetail    string `json:"errorDetail"`
+	ErrorFile      string `json:"errorFile"`
+	ErrorComponent string `json:"errorComponent"`
+}
+
+type FindOptionModel struct {
+	Skip  int
+	Limit int
+	Sort  []string
 }
