@@ -2,14 +2,22 @@ package models
 
 import (
 	"time"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type CustomerLoginModel struct {
+type AuthLoginModel struct {
 	Email    string `json:"email" bson:"email" validate:"required,email"`
 	Password string `json:"password" bson:"password" validate:"required"`
 }
 
-type CustomerRegisterModel struct {
+type AuthComparePasswordModel struct {
+	ID       primitive.ObjectID `json:"id,omitempty" bson:"_id"`
+	Email    string             `json:"email" bson:"email"`
+	Password string             `json:"password" bson:"password"`
+}
+
+type AuthRegisterModel struct {
 	FirstName string    `json:"firstName" bson:"firstName" validate:"required"`
 	LastName  string    `json:"lastName" bson:"lastName" validate:"required"`
 	Email     string    `json:"email" bson:"email" validate:"required,email"`

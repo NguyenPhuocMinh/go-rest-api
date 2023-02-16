@@ -48,7 +48,7 @@ func GetCollection(schemaType string) *mongo.Collection {
 }
 
 // https://pkg.go.dev/go.mongodb.org/mongo-driver/mongo#Collection.Find
-func GetAll(schemaType string, filter interface{}, opts interface{}) (interface{}, error) {
+var GetAll = func(schemaType string, filter interface{}, opts interface{}) (interface{}, error) {
 	logger.Debug("[BEGIN] Datastore GetAll... With SchemaType = ", schemaType)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -66,11 +66,22 @@ func GetAll(schemaType string, filter interface{}, opts interface{}) (interface{
 		return nil, err
 	}
 
-	logger.Debug("[END] Func Create...")
+	logger.Debug("[END] Datastore GetAll...")
 	return results, err
 }
 
-func GetOne(schemaType string, filter interface{}, opts interface{}) {}
+// https://pkg.go.dev/go.mongodb.org/mongo-driver/mongo#Collection.FindOne
+var GetOne = func(schemaType string, filter interface{}, opts *options.FindOneOptions, result interface{}) error {
+	logger.Debug("[BEGIN] Datastore GetOne... With SchemaType = ", schemaType)
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	err := GetCollection(schemaType).FindOne(ctx, filter, opts).Decode(result)
+
+	logger.Debug("[END] Datastore GetOne...")
+	return err
+}
 
 // https://pkg.go.dev/go.mongodb.org/mongo-driver/mongo#Collection.InsertOne
 var CreateOne = func(schemaType string, data interface{}) (*mongo.InsertOneResult, error) {
@@ -79,13 +90,23 @@ var CreateOne = func(schemaType string, data interface{}) (*mongo.InsertOneResul
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	res, err := GetCollection(schemaType).InsertOne(ctx, data)
+	result, err := GetCollection(schemaType).InsertOne(ctx, data)
 
 	logger.Debug("[END] Datastore Create...")
-	return res, err
+	return result, err
 }
 
-func UpdateOne(schemaType string, filter interface{}, opts interface{}) {}
+var UpdateOne = func(schemaType string, filter interface{}, data interface{}, opts *options.UpdateOptions) (interface{}, error) {
+	logger.Debug("[BEGIN] Datastore UpdateOne... With SchemaType = ", schemaType)
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	result, err := GetCollection(schemaType).UpdateOne(ctx, filter, data, opts)
+
+	logger.Debug("[END] Datastore UpdateOne...")
+	return result, err
+}
 
 // https://pkg.go.dev/go.mongodb.org/mongo-driver/mongo#Collection.CountDocuments
 var Count = func(schemaType string, filter interface{}) int {
@@ -94,8 +115,8 @@ var Count = func(schemaType string, filter interface{}) int {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	count, _ := GetCollection(schemaType).CountDocuments(ctx, filter)
+	result, _ := GetCollection(schemaType).CountDocuments(ctx, filter)
 
 	logger.Debug("[END] Datastore Count...")
-	return int(count)
+	return int(result)
 }

@@ -88,5 +88,6 @@ const (
 // services
 const (
 	StructLookupService = "lookup-service"
+	StructCommonervice  = "common-service"
 	StructAuthService   = "auth-service"
 )

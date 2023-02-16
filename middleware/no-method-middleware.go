@@ -15,7 +15,7 @@ var logNoMethod = coreLogger.Logger(constants.AppName, constants.StructNoMethodM
 
 func NoMethodMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		logNoMethod.Debug("BEGIN NoMethodMiddleware...")
+		logNoMethod.Debug("[BEGIN] NoMethodMiddleware...")
 
 		if c.Request.Method == "OPTIONS" {
 			c.AbortWithStatus(constants.StatusNoContent)
@@ -24,7 +24,7 @@ func NoMethodMiddleware() gin.HandlerFunc {
 
 		err := errors.New("Method not found for request path: " + c.Request.URL.String())
 
-		logNoMethod.Info("END NoMethodMiddleware with err= ", err.Error())
+		logNoMethod.Info("[END] NoMethodMiddleware... With Err = ", err.Error())
 		res := commons.TemplateErrorCommon(c, err, resources.MsgCodeRequestMethodNotFound)
 		res.ResponseCommon(c)
 	}

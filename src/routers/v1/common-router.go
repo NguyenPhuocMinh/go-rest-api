@@ -8,8 +8,8 @@ import (
 )
 
 func CommonRouter(r *gin.RouterGroup) {
-	rCommon := r.Group("/commons", middleware.AuthMiddleware())
+	rCommon := r.Group("/common")
 	{
-		rCommon.POST("/tests", controllerV1.Test)
+		rCommon.GET("/tests", middleware.AuthMiddleware(), controllerV1.Test)
 	}
 }

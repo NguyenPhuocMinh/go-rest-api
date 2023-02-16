@@ -1,5 +1,7 @@
 package commons
 
+import "github.com/golang-jwt/jwt/v4"
+
 type ResponseModel struct {
 	Data              interface{} `json:"data"`
 	Error             *ErrorModel `json:"error"`
@@ -18,8 +20,7 @@ type ErrorModel struct {
 	ErrorComponent string `json:"errorComponent"`
 }
 
-type FindOptionModel struct {
-	Skip  int
-	Limit int
-	Sort  []string
+type PayloadModel struct {
+	Email string `json:"email"`
+	jwt.StandardClaims
 }

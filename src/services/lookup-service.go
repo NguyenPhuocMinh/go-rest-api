@@ -8,7 +8,7 @@ import (
 var logLookup = coreLogger.Logger(constants.AppName, constants.StructLookupService)
 
 func LookupService(msgType string, msgAction string) FuncServiceHandler {
-	logLookup.Debug("[BEGIN] LookupService with msgType=", "["+msgType+"]", ", msgAction=", "["+msgAction+"]")
+	logLookup.Debug("[BEGIN] LookupService with msgType = ", "["+msgType+"]", ", msgAction = ", "["+msgAction+"]")
 
 	services := BaseService()
 
@@ -22,7 +22,7 @@ func LookupService(msgType string, msgAction string) FuncServiceHandler {
 		}
 	}
 
-	logLookup.Debug("[END] LookupService Not Found Service With msgType=", "["+msgType+"]", ", msgAction=", "["+msgAction+"]")
+	logLookup.Debug("[END] LookupService Not Found Service With msgType = ", "["+msgType+"]", ", msgAction = ", "["+msgAction+"]")
 
 	return nil
 }

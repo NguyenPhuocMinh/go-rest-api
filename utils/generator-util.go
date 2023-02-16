@@ -9,15 +9,16 @@ import (
 
 var logGenerator = coreLogger.Logger(constants.AppName, constants.StructGeneratorUtil)
 
-func HashPassword(password string) string {
+var HashPassword = func(password string) string {
 	logGenerator.Info("[BEGIN] HashPassword...")
 	passHash, _ := bcrypt.GenerateFromPassword([]byte(password), 14)
 	logGenerator.Info("[END] HashPassword...")
 	return string(passHash)
 }
 
-func ComparePassword(hashedPassword string, providedPassword string) error {
+var ComparePassword = func(hashedPassword, providedPassword string) error {
 	logGenerator.Info("[BEGIN] ComparePassword...")
+
 	err := bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(providedPassword))
 	if err != nil {
 		return err

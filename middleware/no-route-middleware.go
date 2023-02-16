@@ -15,7 +15,7 @@ var logNoRoute = coreLogger.Logger(constants.AppName, constants.StructNoRouteMid
 
 func NoRouteMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		logNoRoute.Debug("BEGIN NoRouteMiddleware...")
+		logNoRoute.Debug("[BEGIN] NoRouteMiddleware...")
 
 		if c.Request.Method == "OPTIONS" {
 			c.AbortWithStatus(constants.StatusNoContent)
@@ -24,7 +24,7 @@ func NoRouteMiddleware() gin.HandlerFunc {
 
 		err := errors.New("Route not found for request path: " + c.Request.URL.String())
 
-		logNoRoute.Debug("END NoRouteMiddleware with err= ", err.Error())
+		logNoRoute.Debug("[END] NoRouteMiddleware... With Err = ", err.Error())
 		res := commons.TemplateErrorCommon(c, err, resources.MsgCodeRequestRouteNotFound)
 		res.ResponseCommon(c)
 	}
