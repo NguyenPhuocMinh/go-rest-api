@@ -82,26 +82,14 @@ func AuthLogin(c *gin.Context) *commons.ResponseModel {
 	// sign token
 	jti, _ := uuid.NewRandom() // => generator uuid v4()
 
-	// token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-	// 	"exp":   time.Now().Add(time.Hour * time.Duration(1)).Unix(), // 1 hours
-	// 	"id":    authCompare.ID,
-	// 	"email": authCompare.Email,
-	// 	"iss":   issuer,
-	// 	"aud":   audience,
-	// 	"jti":   jti,
-	// })
-
-	claims := commons.PayloadModel{
-		authCompare.Email,
-		jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Hour * time.Duration(1)).Unix(), // 1 hours,
-			Id:        jti.String(),
-			Issuer:    issuer,
-			Audience:  audience,
-		},
-	}
-
-	token := jwt.NewWithClaims(jwt.SigningMethodES256, claims)
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"exp":   time.Now().Add(time.Hour * time.Duration(1)).Unix(), // 1 hours
+		"id":    authCompare.ID,
+		"email": authCompare.Email,
+		"iss":   issuer,
+		"aud":   audience,
+		"jti":   jti.String(),
+	})
 
 	tokenString, err := token.SignedString(secretKey)
 	if err != nil {
