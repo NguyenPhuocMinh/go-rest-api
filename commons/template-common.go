@@ -26,7 +26,7 @@ func TemplateSuccessCommon(c *gin.Context, data interface{}, messageCode string)
 func TemplateErrorCommon(c *gin.Context, err error, messageCode string) *ResponseModel {
 	lang := c.Request.Header.Get("Lang")
 
-	errComp, errFile := utils.GetFileByError()
+	errComp, errFile := utils.GetFileByError(err)
 
 	statusCode, messageName, messageTranslator := TemplateMapCommon(messageCode, lang)
 

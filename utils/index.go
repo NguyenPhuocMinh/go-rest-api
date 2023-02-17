@@ -17,13 +17,15 @@ func SlugifyString(s string) string {
 }
 
 // Get File By Error
-func GetFileByError() (string, string) {
-	pc, filename, line, _ := runtime.Caller(1)
+func GetFileByError(err error) (string, string) {
+	pc, filename, line, _ := runtime.Caller(2)
 
 	compName := fmt.Sprintf("%s", runtime.FuncForPC(pc).Name())
 	fileName := fmt.Sprintf("%s:%d", filename, line)
 
 	fmt.Printf("Error File = [%s:%d]", filename, line)
+	fmt.Println()
+	fmt.Printf("Error Comp = [%s]", compName)
 	fmt.Println()
 
 	return compName, fileName
